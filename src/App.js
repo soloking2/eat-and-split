@@ -26,22 +26,22 @@ const initialFriends = [
 ];
 
 function App() {
-  const [showAddFriendForm, setAddFriendForm] = useState(false);
+  const [showAddFriendForm, setShowAddFriendForm] = useState(false);
   const [friendList, setFriendList] = useState(initialFriends);
   const [selectedFriend, setSelectedFriend] = useState(null);
 
   function handleShowAddForm() {
-    setAddFriendForm((form) => !form);
+    setShowAddFriendForm((form) => !form);
   }
 
   function onAddFriend(friend) {
     setFriendList((friends) => [...friends, friend]);
-    setAddFriendForm(false);
+    setShowAddFriendForm(false);
   }
 
   function handleSelectedFriend(friend) {
     setSelectedFriend(curFriend => curFriend?.id === friend.id ? null : friend);
-    setAddFriendForm(false)
+    setShowAddFriendForm(false);
   }
 
   function handleSplitBill(billToBeResolved) {
@@ -63,7 +63,7 @@ function App() {
           onClick={handleShowAddForm}
         />
       </div>
-      {selectedFriend && <SplitBillForm friend={selectedFriend} onSplitBill={handleSplitBill}/>}
+      {selectedFriend && <SplitBillForm friend={selectedFriend} onSplitBill={handleSplitBill} key={selectedFriend?.id}/>}
     </div>
   );
 }
